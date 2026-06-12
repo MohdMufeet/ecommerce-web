@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "./Input";
 import Button from "../Common/Button.jsx";
 import { signup as register, login } from "../../services/Auth/authService.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Form = ({ signup = false, formData, setFormData }) => {
   const [Loading, setLoading] = React.useState(false);
-
+  const [data, setData] = React.useState(null);
+  const navigate = useNavigate();
   const handleInputValue = (e) => {
     const { name, value } = e.target;
     setFormData((p) => ({
@@ -14,7 +15,21 @@ const Form = ({ signup = false, formData, setFormData }) => {
       [name]: value,
     }));
   };
-  
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setData((p) => ({
+        ...p,
+        message: null,
+      }));
+      if (data?.success) {
+        navigate("/dashboard");
+      }
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [data]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.email == "" && formData.password == "") {
@@ -29,19 +44,32 @@ const Form = ({ signup = false, formData, setFormData }) => {
           return;
         }
         const data = await register(formData);
+        setData(data);
       } else {
         const data = await login(formData);
-        console.log("login form submit");
+        setData(data);
       }
     }
     setLoading(false);
+    setFormData((p)=>({
+      name:"",
+      email:"",
+      password:""
+    }));
   };
   return (
     <>
-      <div className="max-w-sm h-content rounded-2xl mx-auto bg-[#fff] px-8 py-8 text-xl">
+      <div className="max-w-sm h-content rounded-2xl mx-auto bg-[#fff] px-8 py-8 text-xl shadow-lg">
         <h1 className="text-3xl font-bold text-center mb-6">
           {signup ? "Signup" : "Login"}
         </h1>
+        {data?.message && (
+          <p
+            className={`${data.success ? "bg-green-200" : "bg-red-200"} px-4 py-2 text-center text-md mb-4 rounded shadow-sm`}
+          >
+            {data.message}
+          </p>
+        )}
         <form className="" onSubmit={handleSubmit}>
           {signup && (
             <div className="flex flex-col mb-6">
@@ -78,6 +106,7 @@ const Form = ({ signup = false, formData, setFormData }) => {
               onValue={(e) => handleInputValue(e)}
             />
           </div>
+
           {!signup && (
             <div className="text-center mb-4">
               <Link
