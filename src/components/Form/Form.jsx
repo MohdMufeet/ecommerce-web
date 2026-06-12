@@ -14,20 +14,26 @@ const Form = ({ signup = false, formData, setFormData }) => {
       [name]: value,
     }));
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setLoading(true);
-
-    
-    console.log("submit", formData);
-    if (signup) {
-      const data = await register(formData);
+    if (formData.email == "" && formData.password == "") {
+      alert("Please fill Email or Password");
     } else {
-      const data = await login(formData);
-      console.log("login form submit");
+      setLoading(true);
+      console.log("submit", formData);
+      if (signup) {
+        if (formData.name == "") {
+          alert("Please fill Name");
+          setLoading(false);
+          return;
+        }
+        const data = await register(formData);
+      } else {
+        const data = await login(formData);
+        console.log("login form submit");
+      }
     }
-
     setLoading(false);
   };
   return (
