@@ -4,13 +4,18 @@ const Input = ({
   labelName,
   labelClassName,
   type = "text",
+  name,
   className,
   placeholder,
+  value,
+  onValue,
+  ...props
 }) => {
+  // const [value,setValue] = React.useState("");
   return (
     <>
       <label className={labelClassName}>{labelName}</label>
-      <input type={type} className={className} placeholder={placeholder} />
+      <input type={type} name={name} value={value} onChange={onValue} className={className} placeholder={placeholder} {...props}/>
     </>
   );
 };

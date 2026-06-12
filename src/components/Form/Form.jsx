@@ -1,23 +1,52 @@
 import React from "react";
 import Input from "./Input";
 import Button from "../Common/Button.jsx";
-// import { Link } from "react-router-dom";
+import { signup as register, login } from "../../services/Auth/authService.js";
+import { Link } from "react-router-dom";
 
-const Form = ({ signup = false }) => {
+const Form = ({ signup = false, formData, setFormData }) => {
+  const [Loading, setLoading] = React.useState(false);
+
+  const handleInputValue = (e) => {
+    const { name, value } = e.target;
+    setFormData((p) => ({
+      ...p,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    
+    console.log("submit", formData);
+    if (signup) {
+      const data = await register(formData);
+    } else {
+      const data = await login(formData);
+      console.log("login form submit");
+    }
+
+    setLoading(false);
+  };
   return (
     <>
       <div className="max-w-sm h-content rounded-2xl mx-auto bg-[#fff] px-8 py-8 text-xl">
         <h1 className="text-3xl font-bold text-center mb-6">
           {signup ? "Signup" : "Login"}
         </h1>
-        <form className="">
+        <form className="" onSubmit={handleSubmit}>
           {signup && (
             <div className="flex flex-col mb-6">
               <Input
                 labelClassName="font-medium"
                 labelName="Name:"
-                className="border rounded px-4 py-2 bg-white"
+                name="name"
+                className="border rounded px-4 py-2 bg-white outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                 placeholder="Name"
+                value={formData.name}
+                onValue={(e) => handleInputValue(e)}
               />
             </div>
           )}
@@ -25,39 +54,50 @@ const Form = ({ signup = false }) => {
             <Input
               labelName="Email:"
               type="email"
+              name="email"
               placeholder="Email"
-              className="border rounded px-4 py-2 bg-white"
+              className="border rounded px-4 py-2 bg-white outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+              value={formData.email}
+              onValue={(e) => handleInputValue(e)}
             />
           </div>
           <div className="flex flex-col my-6">
             <Input
               labelName="Password:"
               type="password"
+              name="password"
               placeholder="Password"
-              className="border rounded px-4 py-2 bg-white"
+              className="border rounded px-4 py-2 bg-white outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+              value={formData.password}
+              onValue={(e) => handleInputValue(e)}
             />
           </div>
-          {/* {!signup && (
-            <Link
-              to="/"
-              className="mb-4 text-center text-blue-600 cursor-pointer hover:underline"
-            >
-              Forgot Password?
-            </Link>
-          )} */}
           {!signup && (
-            <p
-              className="mb-4 text-center text-blue-600 cursor-pointer hover:underline"
-            >
-              Forgot Password?
-            </p>
+            <div className="text-center mb-4">
+              <Link
+                to="/forgot-password"
+                className="text-center text-blue-600 cursor-pointer hover:underline"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           )}
           <div className="text-center">
-            <Button name={signup ? "Signup" : "Login"} className="w-full p-2 bg-blue-600 hover:bg-blue-700 text-white rounded" type="submit"/>
+            <Button
+              isLoading={Loading}
+              name={signup ? "Signup" : "Login"}
+              className="w-full p-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
+              type="submit"
+            />
           </div>
-          <p className="text-center mt-4 cursor-pointer hover:underline">
-            {signup ? "Already have Account" : ("Create new account")}
-          </p>
+          <div className="text-center mt-4">
+            <Link
+              to={signup ? "/login" : "/signup"}
+              className="text-center mt-4 cursor-pointer hover:underline"
+            >
+              {signup ? "Already have Account" : "Create new account"}
+            </Link>
+          </div>
         </form>
       </div>
     </>

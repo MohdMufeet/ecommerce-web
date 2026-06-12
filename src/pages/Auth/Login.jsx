@@ -2,7 +2,7 @@ import { LoginForm } from "../../components";
 const Login = () => {
   return (
     <>
-      <LoginForm />
+      <LoginForm/>
     </>
   );
 };
