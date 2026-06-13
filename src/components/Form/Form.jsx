@@ -3,10 +3,15 @@ import Input from "./Input";
 import Button from "../Common/Button.jsx";
 import { signup as register, login } from "../../services/Auth/authService.js";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth.js";
 
 const Form = ({ signup = false, formData, setFormData }) => {
   const [Loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(null);
+
+  const {isAuthenticate,loginGlobal} = useAuth();
+  console.log("auth",isAuthenticate);
+  
   const navigate = useNavigate();
   const handleInputValue = (e) => {
     const { name, value } = e.target;
@@ -16,19 +21,25 @@ const Form = ({ signup = false, formData, setFormData }) => {
     }));
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setData((p) => ({
-        ...p,
-        message: null,
-      }));
-      if (data?.success) {
-        navigate("/dashboard");
-      }
-    }, 4000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setData((p) => ({
+  //       ...p,
+  //       message: null,
+  //     }));
+  //   }, 2000);
 
-    return () => clearTimeout(timer);
-  }, [data]);
+  //   return () => clearTimeout(timer);
+  // }, []);
+
+  useEffect(()=>{
+    if(isAuthenticate){
+      navigate("/dashbaord");
+
+    }else{
+      navigate("/login")
+    }
+  },[isAuthenticate])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,25 +47,35 @@ const Form = ({ signup = false, formData, setFormData }) => {
       alert("Please fill Email or Password");
     } else {
       setLoading(true);
-      console.log("submit", formData);
+      // console.log("submit", formData);
       if (signup) {
         if (formData.name == "") {
           alert("Please fill Name");
           setLoading(false);
           return;
         }
-        const data = await register(formData);
-        setData(data);
+
+        const serverData = await register(formData);
+        setData(serverData);
+        if (serverData.success && serverData.data.token) {
+          localStorage.setItem("token", serverData.data.token);
+          loginGlobal(serverData.data);
+        }
       } else {
-        const data = await login(formData);
-        setData(data);
+        const serverData = await login(formData);
+        console.log(serverData)
+        setData(serverData);
+       if (serverData.success && serverData.data.token) {
+          localStorage.setItem("token", serverData.data.token);
+          loginGlobal(serverData.data);
+        }
       }
     }
     setLoading(false);
-    setFormData((p)=>({
-      name:"",
-      email:"",
-      password:""
+    setFormData((p) => ({
+      name: "",
+      email: "",
+      password: "",
     }));
   };
   return (

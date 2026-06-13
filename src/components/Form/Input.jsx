@@ -11,7 +11,6 @@ const Input = ({
   onValue,
   ...props
 }) => {
-  // const [value,setValue] = React.useState("");
   return (
     <>
       <label className={labelClassName}>{labelName}</label>
