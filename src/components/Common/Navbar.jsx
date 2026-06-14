@@ -46,9 +46,9 @@ const Navbar = () => {
   ];
   return (
     <>
-      <header className="w-full px-6 py-2 bg-slate-100 flex flex-col sm:flex-row justify-between items-center">
+      <header className="w-full px-6 py-2 bg-slate-200 flex flex-col sm:flex-row justify-between items-center shadow-md">
         <p className="text-3xl font-bold">Welcome</p>
-        <ul className="bg-slate-100 fixed bottom-2 rounded-full px-4 py-2 sm:rounded-none sm:p-0 sm:static flex justify-between items-center gap-4 font-medium text-xl">
+        <ul className="bg-slate-200 z-2 fixed bottom-2 rounded-full px-4 py-2 sm:rounded-none sm:p-0 sm:static flex justify-between items-center gap-4 font-medium text-xl">
           {navItems.map(
             (item, idx) =>
               (!isAuthenticate

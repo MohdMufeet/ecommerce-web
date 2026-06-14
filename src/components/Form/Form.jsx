@@ -10,7 +10,6 @@ const Form = ({ signup, formData, setFormData }) => {
   const [data, setData] = React.useState(null);
 
   const {isAuthenticate,loginGlobal} = useAuth();
-  // console.log("auth",isAuthenticate);
   
   const navigate = useNavigate();
   const handleInputValue = (e) => {
@@ -61,7 +60,6 @@ const Form = ({ signup, formData, setFormData }) => {
         }
       } else {
         const serverData = await login(formData);
-        console.log(serverData)
         setData(serverData);
        if (serverData.success && serverData.data.token) {
           localStorage.setItem("token", serverData.data.token);

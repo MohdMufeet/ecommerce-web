@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllProducts } from "../../services/Product/productService";
+import useProduct from "../../hooks/useProduct";
+import ProductCard from "../../components/Product/ProductCard";
 
 const Home = () => {
+  const { fetchAllProducts, products } = useProduct();
+
+  useEffect(() => {
+    loadingData();
+  }, []);
+
+  const loadingData = async () => {
+    const data = await getAllProducts();
+    await fetchAllProducts(data.data);
+  };
   return (
     <>
       <div className="h-[70%] font-medium text-2xl flex justify-center items-center">
-        <p className="text-center m-8">Login and Explore Our Products</p>
+        {products.length > 0 ? (
+          <ul>
+            {products?.map((product) => (
+              <li
+                key={product._id}
+                className="flex flex-col justify-center items-center gap-6"
+              >
+                <ProductCard data={product} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-center m-8">No Products Currently</p>
+        )}
       </div>
     </>
   );
