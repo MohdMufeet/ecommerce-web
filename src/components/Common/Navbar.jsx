@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import LogoutButton from "../Auth/LogoutButton";
 
 const Navbar = () => {
+  const location = useLocation();
   const { isAuthenticate } = useAuth();
-  useEffect(() => {
-  }, [isAuthenticate]);
+  useEffect(() => {}, [isAuthenticate]);
   const navItems = [
     {
       path: "/",
@@ -36,25 +36,37 @@ const Navbar = () => {
       isShowAll: false,
       id: 4,
     },
+    {
+      path: "/user",
+      name: "Profile",
+      isPublic: false,
+      isShowAll: false,
+      id: 5,
+    },
   ];
   return (
     <>
-      <header className="w-full px-6 py-2 bg-slate-100 flex justify-between items-center">
+      <header className="w-full px-6 py-2 bg-slate-100 flex flex-col sm:flex-row justify-between items-center">
         <p className="text-3xl font-bold">Welcome</p>
-        <ul className="bg-slate-100 flex justify-between items-center gap-4 font-medium text-xl">
+        <ul className="bg-slate-100 fixed bottom-2 rounded-full px-4 py-2 sm:rounded-none sm:p-0 sm:static flex justify-between items-center gap-4 font-medium text-xl">
           {navItems.map(
             (item, idx) =>
               (!isAuthenticate
                 ? item.isPublic || item.isShowAll
                 : !item.isPublic || item.isShowAll) && (
-                <li key={idx} className="hover:text-blue-500">
+                <li
+                  key={idx}
+                  className={`hover:text-blue-500 ${location.pathname === item.path && "text-blue-500"}`}
+                >
                   <Link to={item.path}>{item.name}</Link>
                 </li>
-              )
+              ),
           )}
-          {isAuthenticate && (<li className="hover:text-blue-500">
-                  <LogoutButton />
-            </li>)}
+          {isAuthenticate && (
+            <li className="hover:text-blue-500">
+              <LogoutButton />
+            </li>
+          )}
         </ul>
       </header>
     </>

@@ -27,10 +27,10 @@ const Form = ({ signup, formData, setFormData }) => {
         ...p,
         message: null,
       }));
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [data]);
 
   useEffect(()=>{
     if(isAuthenticate){
@@ -78,7 +78,7 @@ const Form = ({ signup, formData, setFormData }) => {
   };
   return (
     <>
-      <div className="max-w-sm h-content rounded-2xl mx-auto bg-[#fff] px-8 py-8 text-xl shadow-lg">
+      <div className="w-full max-w-sm h-content rounded-2xl mx-6 bg-[#fff] px-4 py-4 sm:px-8 sm:py-8 text-sm sm:text-xl shadow-lg">
         <h1 className="text-3xl font-bold text-center mb-6">
           {signup ? "Signup" : "Login"}
         </h1>

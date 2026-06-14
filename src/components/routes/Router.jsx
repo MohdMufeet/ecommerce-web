@@ -6,6 +6,7 @@ import MainLayout from "../Layouts/MainLayout.jsx";
 import UserLayout from "../Layouts/UserLayout.jsx";
 import UserDashboard from "../../pages/User/UserDashboard.jsx";
 import Cart from "../../pages/User/Cart.jsx";
+import ProtectRoutes from "./ProtectRoutes.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,16 +21,28 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <ProtectRoutes isUserRoute={false}>
+        <Login />
+      </ProtectRoutes>
+    ),
   },
   {
     path: "/register",
-    element: <Signup />,
+    element: (
+      <ProtectRoutes isUserRoute={false}>
+        <Signup />
+      </ProtectRoutes>
+    ),
   },
 
   {
     path: "/user",
-    element: <UserLayout />,
+    element: (
+      <ProtectRoutes isUserRoute={true}>
+        <UserLayout />
+      </ProtectRoutes>
+    ),
     children: [
       {
         index: true,

@@ -11,7 +11,7 @@ const LoginForm = () => {
   return (
     <>
       <Wrapper className="h-screen bg-blue-500 flex justify-center items-center">
-        <Form signup={false} formData={formData} setFormData={setFormData}/>
+        <Form formData={formData} setFormData={setFormData}/>
       </Wrapper>
     </>
   );
