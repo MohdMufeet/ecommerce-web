@@ -12,7 +12,7 @@ const SignupForm = () => {
   return (
     <>
       <Wrapper className="h-screen bg-blue-600 flex justify-center items-center">
-        <Form signup="true" formData={formData} setFormData={setFormData}/>
+        <Form signup={true} formData={formData} setFormData={setFormData}/>
       </Wrapper>
     </>
   );

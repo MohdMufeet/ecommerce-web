@@ -5,12 +5,12 @@ import { signup as register, login } from "../../services/Auth/authService.js";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
 
-const Form = ({ signup = false, formData, setFormData }) => {
+const Form = ({ signup, formData, setFormData }) => {
   const [Loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(null);
 
   const {isAuthenticate,loginGlobal} = useAuth();
-  console.log("auth",isAuthenticate);
+  // console.log("auth",isAuthenticate);
   
   const navigate = useNavigate();
   const handleInputValue = (e) => {
@@ -21,25 +21,23 @@ const Form = ({ signup = false, formData, setFormData }) => {
     }));
   };
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setData((p) => ({
-  //       ...p,
-  //       message: null,
-  //     }));
-  //   }, 2000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setData((p) => ({
+        ...p,
+        message: null,
+      }));
+    }, 2000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(()=>{
     if(isAuthenticate){
-      navigate("/dashbaord");
-
-    }else{
-      navigate("/login")
+      navigate("/user");
     }
   },[isAuthenticate])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -148,7 +146,7 @@ const Form = ({ signup = false, formData, setFormData }) => {
           </div>
           <div className="text-center mt-4">
             <Link
-              to={signup ? "/login" : "/signup"}
+              to={signup ? "/login" : "/register"}
               className="text-center mt-4 cursor-pointer hover:underline"
             >
               {signup ? "Already have Account" : "Create new account"}

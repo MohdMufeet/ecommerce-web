@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import LogoutButton from "../Auth/LogoutButton";
 
 const Navbar = () => {
   const { isAuthenticate } = useAuth();
-  // const isAuthenticate = true;
+  useEffect(() => {
+  }, [isAuthenticate]);
   const navItems = [
     {
       path: "/",
@@ -18,29 +20,21 @@ const Navbar = () => {
       name: "Login",
       isPublic: true,
       isShowAll: false,
-
       id: 2,
     },
     {
-      path: "/signup",
+      path: "/register",
       name: "Sign Up",
       isPublic: true,
       isShowAll: false,
       id: 3,
     },
     {
-      path: "/cart",
+      path: "/user/cart",
       name: "Cart",
       isPublic: false,
       isShowAll: false,
       id: 4,
-    },
-    {
-      path: "/logout",
-      name: "Logout",
-      isPublic: false,
-      isShowAll: false,
-      id: 5,
     },
   ];
   return (
@@ -58,6 +52,9 @@ const Navbar = () => {
                 </li>
               )
           )}
+          {isAuthenticate && (<li className="hover:text-blue-500">
+                  <LogoutButton />
+            </li>)}
         </ul>
       </header>
     </>
