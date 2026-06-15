@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../Form/Input";
 import Button from "../Common/Button";
 import useProduct from "../../hooks/useProduct";
@@ -14,11 +14,16 @@ const EditProduct = () => {
     image: "",
     stoke: "",
     price: "",
+    category: "",
   });
   const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
-    fetchProduct(id);
+    const loadProduct = async () =>{
+      await fetchProduct(id);
+
+    }
+    loadProduct()
   }, []);
 
   const handleInput = (e) => {
@@ -27,6 +32,10 @@ const EditProduct = () => {
   };
   const handleUpdate = async (e) => {
     e.preventDefault();
+    if(formData.title.length === 27 && formData.description.trim().length === 120){
+      alert("Title must be containded 27 letters and description must be 120 letters");
+      return;
+    }
     const product = await updateProduct({ formData, id });
     setData(product);
     setFormData({
@@ -35,10 +44,11 @@ const EditProduct = () => {
       image: "",
       stoke: "",
       price: "",
+      category: ""
     });
   };
 
-  const allowedKeys = ["title", "description", "image", "stoke", "price"];
+  const allowedKeys = ["title", "description", "image", "stoke", "price","category"];
   allowedKeys.map((key) => setData(formData[key]));
   return (
     <>

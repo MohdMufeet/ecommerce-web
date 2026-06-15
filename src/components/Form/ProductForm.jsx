@@ -1,4 +1,6 @@
 import React from "react";
+import Input from "./Input";
+import Button from "../Common/Button";
 
 const ProductForm = ({ handleSubmit, handleInput, formData, data }) => {
   return (
@@ -67,6 +69,19 @@ const ProductForm = ({ handleSubmit, handleInput, formData, data }) => {
             placeholder="Enter Image Url"
             className="bg-white px-4 py-2 focus:ring-blue-500 outline-none ring-1 ring-gray-300 rounded focus:ring-2 my-1"
             value={formData.image}
+            onChange={(e) => handleInput(e)}
+          />
+        </div>
+
+        <div className="flex flex-col justify-center items-left w-full my-2">
+          <Input
+            labelName="Category:"
+            labelClassName="text-left font-medium"
+            name="category"
+            type="text"
+            placeholder="Enter Category"
+            className="bg-white px-4 py-2 focus:ring-blue-500 outline-none ring-1 ring-gray-300 rounded focus:ring-2 my-1"
+            value={formData.category}
             onChange={(e) => handleInput(e)}
           />
         </div>

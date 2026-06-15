@@ -13,6 +13,7 @@ const CreateProduct = () => {
     image: "",
     stoke: "",
     price: "",
+    category: ""
   });
 
   const handleInput = (e) => {
@@ -30,6 +31,7 @@ const CreateProduct = () => {
       image: "",
       stoke: "",
       price: "",
+     category: ""
     });
   };
   return (

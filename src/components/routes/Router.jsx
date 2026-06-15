@@ -7,6 +7,11 @@ import UserLayout from "../Layouts/UserLayout.jsx";
 import UserDashboard from "../../pages/User/UserDashboard.jsx";
 import Cart from "../../pages/User/Cart.jsx";
 import ProtectRoutes from "./ProtectRoutes.jsx";
+import AdminLayout from "../Layouts/AdminLayout.jsx";
+import AdminDashboard from "../Admin/AdminDashboard.jsx";
+import EditProduct from "../Product/EditProduct.jsx";
+import CreateProduct from "../Product/CreateProduct.jsx";
+import AllProducts from "../Product/AllProducts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +56,32 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectRoutes isAdminRoute={true}>
+        <AdminLayout />
+      </ProtectRoutes>
+    ),
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard />,
+      },
+      {
+        path: "create-product",
+        element: <CreateProduct />,
+      },
+      {
+        path: "update-product/:id",
+        element: <EditProduct />,
+      },
+      {
+        path: "all-products",
+        element: <AllProducts />,
       },
     ],
   },
