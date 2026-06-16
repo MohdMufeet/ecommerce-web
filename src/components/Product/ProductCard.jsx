@@ -11,7 +11,7 @@ const ProductCard = ({
 }) => {
   return (
     <>
-      <div className="w-full max-w-sm shadow-lg m-8 rounded-xl overflow-hidden h-full">
+      <div key={data._id} className="w-full max-w-sm shadow-lg m-8 rounded-xl overflow-hidden h-full">
         <img
           src={data.image}
           alt={ProductCard.title}

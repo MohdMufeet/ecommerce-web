@@ -19,7 +19,7 @@ const AllProducts = () => {
   
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 overflow-scroll-y my-8">
-      {(products.length > 0) ? products.map((product)=>(<ProductCard isAdmin={true} data={product}/>)) : <p>No products</p>}
+      {(products?.length > 0) ? products.map((product)=>(<ProductCard isAdmin={true} data={product}/>)) : <p>No products</p>}
     </div>
   );
 };
