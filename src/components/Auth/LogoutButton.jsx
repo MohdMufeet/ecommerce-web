@@ -1,15 +1,11 @@
 import React from "react";
 import Button from "../Common/Button";
-import useAuth from "../../hooks/useAuth";
 
-const LogoutButton = () => {
-  const { logoutGlobal } = useAuth();
-  const handleLogout = () => {
-    logoutGlobal();
-  };
+const LogoutButton = ({handleLogout , className}) => {
+  
   return (
     <>
-      <Button name="Logout" onClick={handleLogout} />
+      <Button name="Logout" onClick={handleLogout} className={className}/>
     </>
   );
 };

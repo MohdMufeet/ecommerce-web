@@ -5,8 +5,11 @@ import LogoutButton from "../Auth/LogoutButton";
 
 const Navbar = () => {
   const location = useLocation();
-  const { isAuthenticate } = useAuth();
-  useEffect(() => {}, [isAuthenticate]);
+  const { logoutGlobal, isAuthenticate } = useAuth();
+  const handleLogout = () => {
+    logoutGlobal();
+  };
+  // useEffect(() => {}, [isAuthenticate]);
   const navItems = [
     {
       path: "/",
@@ -64,7 +67,7 @@ const Navbar = () => {
           )}
           {isAuthenticate && (
             <li className="hover:text-blue-500">
-              <LogoutButton />
+              <LogoutButton handleLogout={handleLogout} />
             </li>
           )}
         </ul>

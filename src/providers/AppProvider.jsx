@@ -1,16 +1,16 @@
-import React from 'react'
-import AuthProvider from './AuthProvider'
-import ProductProvider from './ProductProvider'
+import React from "react";
+import AuthProvider from "./AuthProvider";
+import ProductProvider from "./ProductProvider";
+import AdminProvider from "./AdminProvider";
 
-
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
   return (
-    <AuthProvider>
-      <ProductProvider>
-        {children}
-      </ProductProvider>
-    </AuthProvider>
-  )
-}
+    <AdminProvider>
+      <AuthProvider>
+        <ProductProvider>{children}</ProductProvider>
+      </AuthProvider>
+    </AdminProvider>
+  );
+};
 
-export default AppProvider
+export default AppProvider;

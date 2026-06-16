@@ -7,7 +7,7 @@ const Home = () => {
   const { fetchAllProducts, products } = useProduct();
 
   useEffect(() => {
-      loadingData();
+    loadingData();
   }, []);
 
   const loadingData = async () => {
@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <>
       <div className="h-[70%] font-medium text-2xl flex justify-center items-center">
-        {(products?.length > 0) ? (
+        {products?.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {products?.map((product) => (
               <li

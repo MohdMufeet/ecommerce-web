@@ -7,11 +7,16 @@ import UserLayout from "../Layouts/UserLayout.jsx";
 import UserDashboard from "../../pages/User/UserDashboard.jsx";
 import Cart from "../../pages/User/Cart.jsx";
 import ProtectRoutes from "./ProtectRoutes.jsx";
-import AdminLayout from "../Layouts/AdminLayout.jsx";
-import AdminDashboard from "../Admin/AdminDashboard.jsx";
 import EditProduct from "../Product/EditProduct.jsx";
 import CreateProduct from "../Product/CreateProduct.jsx";
 import AllProducts from "../Product/AllProducts.jsx";
+import AdminLoginFom from "../Auth/Admin/AdminLoginFom.jsx";
+import AdminSignupForm from "../Auth/Admin/AdminSignupForm.jsx";
+import AdminProfile from "../Auth/Admin/AdminProfile.jsx";
+import AuthLayout from "../Layouts/AuthLayout.jsx";
+import AdminLayout from "../Layouts/AdminLayout.jsx";
+import ForgotPassword from "../Auth/ForgotPassword.jsx";
+import AllOrders from "../Auth/Admin/AllOrders.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,17 +32,25 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <ProtectRoutes isUserRoute={false}>
+      // <ProtectRoutes isUserRoute={false}>
         <Login />
-      </ProtectRoutes>
+      // </ProtectRoutes>
     ),
   },
   {
     path: "/register",
     element: (
-      <ProtectRoutes isUserRoute={false}>
+      // <ProtectRoutes isUserRoute={false}>
         <Signup />
-      </ProtectRoutes>
+      // </ProtectRoutes>
+    ),
+  },
+  {
+    path: "/forgot-password",
+    element: (
+      // <ProtectRoutes isUserRoute={false}>
+        <ForgotPassword />
+      // </ProtectRoutes>
     ),
   },
 
@@ -60,6 +73,20 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "admin/login",
+        element: <AdminLoginFom />,
+      },
+      {
+        path: "admin/ignup",
+        element: <AdminSignupForm />,
+      },
+    ],
+  },
+  {
     path: "/admin",
     element: (
       <ProtectRoutes isAdminRoute={true}>
@@ -68,9 +95,10 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        index: true,
-        element: <AdminDashboard />,
+        path: "profile",
+        element: <AdminProfile />,
       },
+
       {
         path: "create-product",
         element: <CreateProduct />,
@@ -82,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: "all-products",
         element: <AllProducts />,
+      },
+      {
+        path: "all-orders",
+        element: <AllOrders />,
       },
     ],
   },
