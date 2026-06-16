@@ -7,9 +7,7 @@ const Home = () => {
   const { fetchAllProducts, products } = useProduct();
 
   useEffect(() => {
-    if(products?.length == 0){
       loadingData();
-    }
   }, []);
 
   const loadingData = async () => {
