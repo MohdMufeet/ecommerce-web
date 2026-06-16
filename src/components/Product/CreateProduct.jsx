@@ -11,9 +11,9 @@ const CreateProduct = () => {
     title: "",
     description: "",
     image: "",
-    stoke: "",
+    stock: "",
     price: "",
-    category: ""
+    category: "",
   });
 
   const handleInput = (e) => {
@@ -29,9 +29,9 @@ const CreateProduct = () => {
       title: "",
       description: "",
       image: "",
-      stoke: "",
+      stock: "",
       price: "",
-     category: ""
+     category: "",
     });
   };
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import Input from "./Input";
 import Button from "../Common/Button";
 
-const ProductForm = ({ handleSubmit, handleInput, formData, data }) => {
+const ProductForm = ({ isUpdate,handleSubmit, handleInput, formData, data }) => {
   return (
     <>
       <form
@@ -49,13 +49,13 @@ const ProductForm = ({ handleSubmit, handleInput, formData, data }) => {
 
         <div className="flex flex-col justify-center items-left  w-full my-2">
           <Input
-            labelName="Stoke:"
+            labelName="Stock:"
             labelClassName="text-left font-medium"
-            name="stoke"
+            name="stock"
             type="number"
             placeholder="Enter Title"
             className="bg-white px-4 py-2 focus:ring-blue-500 outline-none ring-1 ring-gray-300 rounded focus:ring-2 my-1"
-            value={formData.stoke}
+            value={formData.stock}
             onChange={(e) => handleInput(e)}
           />
         </div>
@@ -88,14 +88,14 @@ const ProductForm = ({ handleSubmit, handleInput, formData, data }) => {
         {data && (
           <div className="flex flex-col justify-center items-left  w-full my-2">
             <p
-              className={`${data.success ? "bg-green-200" : "bg-red-200"} px-4 py-2 text-center text-md mb-4 rounded shadow-sm`}
+              className={`${data?.success ? "bg-green-200" : "bg-red-200"} px-4 py-2 text-center text-md mb-4 rounded shadow-sm`}
             >
-              {data.message}
+              {data?.message}
             </p>
           </div>
         )}
         <Button
-          name="Create Product"
+          name={isUpdate ? "Update Product":"Create Product"}
           type="submit"
           className="mt-4 px-4 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 hover:scale-95 hover:text-md"
         />

@@ -25,18 +25,18 @@ export const getAllProducts = async () => {
     return error.response.data;
   }
 };
-export const updateProduct = async ({ productData, id }) => {
+export const updateProduct = async ({ formData, id }) => {
   try {
-    const response = await api.post(`product/update/${id}`, productData);
+    const response = await api.put(`product/update/${id}`, formData);
     return response.data;
   } catch (error) {
     return error.response.data;
   }
 };
 
-export const deleteProduct = async ({ productData, id }) => {
+export const deleteProduct = async (id) => {
   try {
-    const response = await api.post(`product/delete/${id}`, productData);
+    const response = await api.delete(`product/delete/${id}`);
     return response.data;
   } catch (error) {
     return error.response.data;

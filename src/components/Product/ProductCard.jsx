@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({
   data,
+  idx,
   isAdmin = false,
   handleAddToCart,
   handleDelete,
@@ -11,10 +12,10 @@ const ProductCard = ({
 }) => {
   return (
     <>
-      <div key={data._id} className="w-full max-w-sm shadow-lg m-8 rounded-xl overflow-hidden h-full">
+      <div className="w-full max-w-sm shadow-lg m-8 rounded-xl overflow-hidden h-full">
         <img
           src={data.image}
-          alt={ProductCard.title}
+          alt={data.title}
           className="w-full h-48 object-cover"
         />
         <div className="w-full  h-content p-4 shadow-lg">
