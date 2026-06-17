@@ -6,7 +6,7 @@ import useAdmin from "../../hooks/useAdmin";
 const Sidbar = () => {
   const { logoutAdminGlobal } = useAdmin();
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     await logoutAdminGlobal();
   };
 
