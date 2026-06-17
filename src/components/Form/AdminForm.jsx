@@ -2,7 +2,7 @@ import React from "react";
 import Input from "./Input";
 import Button from "../Common/Button";
 
-const AdminForm = ({ handleInput, handleSubmit,formData , data}) => {
+const AdminForm = ({ handleInput, handleSubmit,formData , data, loadingState}) => {
   return (
     
       <form className="max-w-sm w-full h-content p-8 gap-4 shadow-lg" onSubmit={handleSubmit}>
@@ -30,7 +30,8 @@ const AdminForm = ({ handleInput, handleSubmit,formData , data}) => {
           />
         </div>
         <Button
-          name="Login"
+          name={loadingState ? "Loading...":"Login"}
+          isLoading={loadingState}
           className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white font-medium"
         />
       </form>

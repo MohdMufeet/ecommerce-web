@@ -6,7 +6,7 @@ import Wrapper from "../../Common/Wrapper";
 import { useNavigate } from "react-router-dom";
 
 const AdminLoginFom = () => {
-  const [loading, setLoaing] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [serverData, setServerData] = React.useState(null);
   const [formData, setFormData] = React.useState({
     email: "",
@@ -25,7 +25,6 @@ const AdminLoginFom = () => {
 
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     setLoading(true);
     const admin = await adminLogin(formData);
@@ -41,7 +40,7 @@ const AdminLoginFom = () => {
         password: "",
       });
     }
-    setLoaing(false);
+    setLoading(false);
   };
 
 
@@ -58,6 +57,7 @@ const AdminLoginFom = () => {
           handleSubmit={handleSubmit}
           formData={formData}
           data={serverData}
+          loadingState={loading}
         />
       </Wrapper>
     </>
