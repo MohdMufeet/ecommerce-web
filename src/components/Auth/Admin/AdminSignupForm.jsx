@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import AdminForm from "../../Form/AdminForm";
 import { adminRegister } from "../../../services/Admin/adminServices";
 import { useNavigate } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
 
 const AdminSignupForm = () => {
   const [serverData, setServerData] = React.useState(null);
