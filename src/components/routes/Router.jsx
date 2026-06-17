@@ -11,17 +11,18 @@ import EditProduct from "../Product/EditProduct.jsx";
 import CreateProduct from "../Product/CreateProduct.jsx";
 import AllProducts from "../Product/AllProducts.jsx";
 import AdminLoginFom from "../Auth/Admin/AdminLoginFom.jsx";
-import AdminSignupForm from "../Auth/Admin/AdminSignupForm.jsx";
 import AdminProfile from "../Auth/Admin/AdminProfile.jsx";
 import AuthLayout from "../Layouts/AuthLayout.jsx";
 import AdminLayout from "../Layouts/AdminLayout.jsx";
 import ForgotPassword from "../Auth/ForgotPassword.jsx";
 import AllOrders from "../Auth/Admin/AllOrders.jsx";
+import NotFound from "../../pages/Error/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -32,25 +33,26 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      // <ProtectRoutes isUserRoute={false}>
+      <ProtectRoutes isUserRoute={false}>
         <Login />
-      // </ProtectRoutes>
+      </ProtectRoutes>
     ),
   },
   {
     path: "/register",
     element: (
-      // <ProtectRoutes isUserRoute={false}>
+      <ProtectRoutes isUserRoute={false}>
         <Signup />
-      // </ProtectRoutes>
+      </ProtectRoutes>
     ),
+    // errorElement: <NotFound />,
   },
   {
     path: "/forgot-password",
     element: (
-      // <ProtectRoutes isUserRoute={false}>
+      <ProtectRoutes isUserRoute={false}>
         <ForgotPassword />
-      // </ProtectRoutes>
+      </ProtectRoutes>
     ),
   },
 
@@ -61,6 +63,7 @@ const router = createBrowserRouter([
         <UserLayout />
       </ProtectRoutes>
     ),
+
     children: [
       {
         index: true,
@@ -79,10 +82,6 @@ const router = createBrowserRouter([
       {
         path: "admin/login",
         element: <AdminLoginFom />,
-      },
-      {
-        path: "admin/signup",
-        element: <AdminSignupForm />,
       },
     ],
   },

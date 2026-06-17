@@ -2,24 +2,11 @@ import React from "react";
 import Input from "./Input";
 import Button from "../Common/Button";
 
-const AdminForm = ({ isSignup = false, handleInput, handleSubmit,formData , data}) => {
+const AdminForm = ({ handleInput, handleSubmit,formData , data}) => {
   return (
     
       <form className="max-w-sm w-full h-content p-8 gap-4 shadow-lg" onSubmit={handleSubmit}>
         {data?.message && <p className={`${!data.success? "bg-red-200":"bg-green-200"} text-medium text-black text-center`}>{data.message}</p>}
-        {isSignup && (
-          <div className="flex flex-col my-4 gap-2">
-            <Input
-              className="px-4 py-2 ring-2 ring-blue-200 focus:ring-blue-500 outline-none"
-              type="text"
-              placeholder="Enter Name"
-              labelName="Name:"
-              name="name"
-              onChange={(e) => handleInput(e)}
-              value={formData.name}
-            />
-          </div>
-        )}
         <div className="flex flex-col my-4 gap-2">
           <Input
             className="px-4 py-2 ring-2 ring-blue-200 focus:ring-blue-500 outline-none"
@@ -43,7 +30,7 @@ const AdminForm = ({ isSignup = false, handleInput, handleSubmit,formData , data
           />
         </div>
         <Button
-          name={isSignup ? "SignUp" : "Login"}
+          name="Login"
           className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white font-medium"
         />
       </form>
